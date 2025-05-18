@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>I'm Sorry</title>
+  <style>
+    body {
+      background-color: #ffe6e6;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 90%;
+      height: auto;
+      margin: 10px 0;
+    }
+
+    h1, h2 {
+      margin: 10px 0;
+      color: #333;
+    }
+
+    #button-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      position: relative;
+    }
+
+    .btn {
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 100px;
+    }
+
+    #yesBtn {
+      background-color: #4CAF50;
+      color: white;
+      z-index: 2;
+    }
+
+    #noBtn {
+      background-color: #ccc;
+      color: black;
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="kitty-please.gif" alt="Cute cat begging">
+  <img src="cat-sad-kitty-sad.gif" alt="Sad cat">
+
+  <h1>I am sorry for sleeping, please forgive me</h1>
+  <h2>Do you wish to forgive me pleaseplease</h2>
+
+  <div id="button-container">
+    <button id="yesBtn" class="btn">Yes</button>
+    <button id="noBtn" class="btn">No</button>
+  </div>
+
+  <script>
+    let noClicks = 0;
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const container = document.getElementById('button-container');
+
+    function moveNoButton(distancePx) {
+      noBtn.style.position = 'absolute';
+      noBtn.style.top = `${yesBtn.offsetTop + distancePx}px`;
+      noBtn.style.left = '50%';
+      noBtn.style.transform = 'translateX(-50%)';
+    }
+
+    noBtn.addEventListener('click', () => {
+      noClicks++;
+
+      if (noClicks === 1) {
+        yesBtn.style.transform = "scale(2)";
+        moveNoButton(120);
+      } else if (noClicks === 2) {
+        yesBtn.style.transform = "scale(5)";
+        moveNoButton(220);
+      } else {
+        yesBtn.style.position = "fixed";
+        yesBtn.style.top = "0";
+        yesBtn.style.left = "0";
+        yesBtn.style.width = "100vw";
+        yesBtn.style.height = "100vh";
+        yesBtn.style.fontSize = "3rem";
+        yesBtn.style.borderRadius = "0";
+        yesBtn.style.zIndex = "999";
+        yesBtn.innerText = "YES";
+        noBtn.style.display = "none"; // hide no button
+      }
+    });
+
+    yesBtn.addEventListener('click', () => {
+      window.location.href = "forgiven.html";
+    });
+  </script>
+
+</body>
+</html>
